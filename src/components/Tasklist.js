@@ -1,11 +1,12 @@
 import React from "react";
 import Taskitem from "./Taskitem";
 
-const Tasklist = () => {
+const Tasklist = ({ tasks }) => {
   return (
     <div className="flex flex-col gap-2 bg-gray-900 container mx-auto p-10">
-      <Taskitem />
-      <Taskitem />
+      {tasks.map((task) => {
+        <Taskitem task={task} key={task.id} />;
+      })}
     </div>
   );
 };
