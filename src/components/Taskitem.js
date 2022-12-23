@@ -9,14 +9,14 @@ const Taskitem = ({ task }) => {
         <span>
           <input type="checkbox" className="accent-purple-400" />
         </span>
-        <p className="group-hover:text-purple-400">{task.text}</p>
+        <p className="text-gray-500 group-hover:text-purple-400">{task.text}</p>
       </div>
-      <div>
+      <div className="task-item-right flex gap-3 text-gray-500 group-hover:text-purple-400 cursor-pointer duration-300">
         <span>
-          <BiEdit className="task-item-right flex gap-3 text-gray-500 group-hover:text-purple-400 cursor-pointer duration-300" />
+          <BiEdit />
         </span>
         <span>
-          <MdDelete className="task-item-right flex gap-3 text-gray-500 group-hover:text-purple-400 cursor-pointer duration-300" />
+          <MdDelete />
         </span>
       </div>
     </div>
