@@ -8,6 +8,8 @@ export const DeleteHandlerContext = createContext();
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     //receive from server
@@ -20,8 +22,9 @@ const App = () => {
       if (!res.ok) throw new Error("Something went wrong!");
       const data = await res.json();
       setTasks(data);
+      setLoading(false);
     } catch (error) {
-      console.log(error.message);
+      setError(error.message);
     }
   };
 
@@ -30,6 +33,7 @@ const App = () => {
     //delete data
     deleteData(id);
     //set updated task
+    setTasks(tasks.filter((task) => id !== task.id));
   };
 
   const deleteData = async (id) => {
@@ -46,7 +50,7 @@ const App = () => {
       <DeleteHandlerContext.Provider value={handleDelete}>
         <Header />
         <Addtask tasks={tasks} setTasks={setTasks} />
-        <Tasklist tasks={tasks} />
+        <Tasklist tasks={tasks} error={(error, loading)} />
         <Footer />
       </DeleteHandlerContext.Provider>
     </div>
