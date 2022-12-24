@@ -14,7 +14,7 @@ const App = () => {
   //fetching data
   const fetchingData = async () => {
     try {
-      const res = await fetch("https://elastic-slow-treatment.glitch.me/tasks");
+      const res = await fetch("https://fluff-cheddar-elephant.glitch.me/tasks");
       if (!res.ok) throw new Error("Something went wrong!");
       const data = await res.json();
       setTasks(data);
@@ -26,7 +26,7 @@ const App = () => {
   return (
     <div className="bg-gradient-to-t from-gray-900 to-purple-700 min-h-screen text-2xl flex flex-col py-10">
       <Header />
-      <Addtask />
+      <Addtask tasks={tasks} setTasks={setTasks} />
       <Tasklist tasks={tasks} />
       <Footer />
     </div>

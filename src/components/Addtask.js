@@ -13,13 +13,17 @@ const Addtask = ({ tasks, setTasks }) => {
 
   //task submission
   const taskPosting = async (text) => {
-    const res = await fetch("https://elastic-slow-treatment.glitch.me/tasks", {
+    const res = await fetch("https://fluff-cheddar-elephant.glitch.me/tasks", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({ text }),
     });
+
+    //realtime update
+    const data = await res.json();
+    setTasks([...tasks, data]);
   };
 
   return (
