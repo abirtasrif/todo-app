@@ -15,9 +15,12 @@ const Taskitem = ({ task }) => {
         <p className="text-gray-500 group-hover:text-purple-400">{task.text}</p>
       </div>
       <div className="task-item-right flex gap-3 text-gray-500  cursor-pointer duration-300">
-        <span className="group-hover:text-purple-400">
+        <button
+          onClick={() => handleEdit(task.id)}
+          className="group-hover:text-purple-400"
+        >
           <BiEdit />
-        </span>
+        </button>
         <button
           onClick={() => handleDelete(task.id)}
           className="group-hover:text-pink-400"
