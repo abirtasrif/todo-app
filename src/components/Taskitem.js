@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { DeleteHandlerContext } from "../App";
+import { DeleteHandlerContext, EditHandlerContext } from "../App";
 
-const Taskitem = ({ task }) => {
+const Taskitem = ({
+  task,
+  handleEditedSubmitter,
+  editedText,
+  setEditedText,
+}) => {
   const handleDelete = useContext(DeleteHandlerContext);
+  const handleEdit = useContext(EditHandlerContext);
 
   return (
     <div className="task-item flex justify-between items-center bg-gray-900 p-5 rounded hover:bg-gradient-to-r hover:from-purple-800 hover:to-gray-800 group">
@@ -12,7 +18,23 @@ const Taskitem = ({ task }) => {
         <span>
           <input type="checkbox" className="accent-purple-400" />
         </span>
-        <p className="text-gray-500 group-hover:text-purple-400">{task.text}</p>
+
+        {task.isEditable && (
+          <form>
+            <input
+              type="text"
+              required
+              value={editedText}
+              onChange={(e) => setEditedText(e.target.value)}
+            />
+          </form>
+        )}
+
+        {task.isEditable && (
+          <p className="text-gray-500 group-hover:text-purple-400">
+            {task.text}
+          </p>
+        )}
       </div>
       <div className="task-item-right flex gap-3 text-gray-500  cursor-pointer duration-300">
         <button

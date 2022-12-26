@@ -1,7 +1,14 @@
 import React from "react";
 import Taskitem from "./Taskitem";
 
-const Tasklist = ({ tasks, error, loading }) => {
+const Tasklist = ({
+  tasks,
+  error,
+  loading,
+  handleEditedSubmitter,
+  editedText,
+  setEditedText,
+}) => {
   return (
     <div className="flex flex-col gap-2 bg-gray-900 container mx-auto p-10 text-gray-400">
       {loading ? (
@@ -12,7 +19,13 @@ const Tasklist = ({ tasks, error, loading }) => {
         )
       )}
       {tasks.map((task) => (
-        <Taskitem task={task} key={task.id} />
+        <Taskitem
+          task={task}
+          key={task.id}
+          handleEditedSubmitter={handleEditedSubmitter}
+          editedText={editedText}
+          setEditedText={setEditedText}
+        />
       ))}
     </div>
   );

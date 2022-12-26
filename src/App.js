@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Tasklist from "./components/Tasklist";
 
 export const DeleteHandlerContext = createContext();
+export const EditHandlerContext = createContext();
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -63,13 +64,27 @@ const App = () => {
       .map((targetedEl) => (targetedEl.isEditable = false));
   };
 
+  //editing task from handler
+  const handleEditedSubmitter = (e, id) => {
+    console.log(id);
+  };
+
   return (
     <div className="bg-gradient-to-t from-gray-900 to-purple-700 min-h-screen text-2xl flex flex-col py-10">
       <DeleteHandlerContext.Provider value={handleDelete}>
-        <Header />
-        <Addtask tasks={tasks} setTasks={setTasks} />
-        <Tasklist tasks={tasks} error={error} loading={loading} />
-        <Footer />
+        <EditHandlerContext.Provider value={handleEdit}>
+          <Header />
+          <Addtask tasks={tasks} setTasks={setTasks} />
+          <Tasklist
+            tasks={tasks}
+            error={error}
+            loading={loading}
+            handleEditedSubmitter={handleEditedSubmitter}
+            editedText={editedText}
+            setEditedText={setEditedText}
+          />
+          <Footer />
+        </EditHandlerContext.Provider>
       </DeleteHandlerContext.Provider>
     </div>
   );
