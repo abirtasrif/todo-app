@@ -66,7 +66,27 @@ const App = () => {
 
   //editing task from handler
   const handleEditedSubmitter = (e, id) => {
-    console.log(id);
+    e.preventDefault();
+    setToggleEditMode(!toggleEditMode);
+
+    const editPersistance = {
+      text: editedText,
+      id: id,
+    };
+
+    // put req.
+    putRequest(id, editPersistance);
+  };
+
+  const putRequest = async (id, newData) => {
+    fetch("https://fluff-cheddar-elephant.glitch.me/tasks/${id}"),
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(newData),
+      };
   };
 
   return (
